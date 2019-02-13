@@ -1,0 +1,33 @@
+﻿解答日：2019/
+
+
+Q:アクセス記録テーブル（access_log）からリンク元URLを重複のない形式で取り出してみましょう。
+　以下の空欄を埋めて、SQL命令を完成させてください。
+　
+[ ① ]
+ referer
+[ ② ]
+ access_log
+;
+
+
+A:
+SELECT        -- 選択命令文
+DISTINCT      -- 重複除去のキーワード
+ referer      -- 抽出するリンク元URLのカラム指定
+FROM          -- 抽出先指定の命令文
+ access_log   -- 抽出先のアクセス記録テーブルの指定
+;             -- 命令文の終了
+
++---------------------------+
+| referer                   |
++---------------------------+
+| http://wings.msn.to/hamu/ |
+| http://wings.msn.to/neko/ |
+| http://wings.msn.to/inu/  |
+| http://wings.msn.to/saru/ |
+| http://wings.msn.to/tori/ |
+| http://wings.msn.to/kame/ |
+| NULL                      |
++---------------------------+
+7 rows in set (0.03 sec)
