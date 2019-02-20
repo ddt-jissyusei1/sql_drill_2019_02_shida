@@ -5,15 +5,15 @@ Q:アンケート集計テーブル（quest）から年齢（age列）が30歳�
 　
 
 A:
-SELECT
- name,
- sex,
- prefecture
-FROM
- quest
-WHERE
- age BETWEEN 30 AND 40
-;
+SELECT                 -- 選択命令文
+ name,                 -- 取り出す'名前'レコードのカラム名指定
+ sex,                  -- 取り出す'性別'レコードのカラム名指定
+ prefecture            -- 取り出す'都道府県'レコードのカラム指定
+FROM                   -- 選択先指定の命令文
+ quest                 -- 抽出するレコードがあるテーブル名の指定
+WHERE                  -- 抽出条件命令文
+ age BETWEEN 30 AND 40 -- '年齢'レコードが30から40の間であるという条件指定
+;                      -- 命令の終了を意味するセミコロン
 
 +------------+-----+------------+
 | name       | sex | prefecture |
