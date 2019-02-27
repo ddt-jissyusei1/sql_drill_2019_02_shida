@@ -1,0 +1,49 @@
+﻿解答日:2019/02/13
+
+Q：ユーザテーブル（usr）から「東京都」に住んでいない人の情報だけを取り出してみましょう。
+　取り出す列は、l_name、f_name、email列とします。
+　
+　SELECT
+　 l_name,
+　 f_name,
+　 email
+　FROM
+　 [ ① ]
+　WHERE
+　 [ ② ]
+　;
+　
+A：
+SELECT                 -- 選択命令文
+ l_name,               -- 取り出す'氏'レコードのカラム名指定
+ f_name,               -- 取り出す'名'レコードのカラム名指定
+ email                 -- 取り出す'Eメールアドレス'レコードのカラム名指定
+FROM                   -- 選択先指定の命令文
+ usr                   -- 取り出すレコードがあるテーブル名の指定
+WHERE                  -- 特定条件で取り出すための条件命令文
+ prefecture <> '東京都'-- '都道府県'レコードが'東京都'と等しくないという条件指定
+;                      -- 命令の終了を意味するセミコロン
+
++--------+--------+----------------------+
+| l_name | f_name | email                |
++--------+--------+----------------------+
+| 井上   | 一郎   | inoue@wings.msn.to   |
+| 上原   | 幸一   | uehara@wings.msn.to  |
+| 江本   | 聡     | emoto@wings.msn.to   |
+| 河合   | 泰治   | kawai@wings.msn.to   |
+| 木下   | 一樹   | kino@wings.msn.to    |
+| 久保田 | 守     | kubota@wings.msn.to  |
+| 児玉   | 毅     | kodama@wings.msn.to  |
+| 坂口   | 駿     | saka@examples.com    |
+| 井上   | 一郎   | shimi@wings.msn.to   |
+| 矢口   | 亜由美 | yaguchi@wings.msn.to |
+| 有木   | 茉莉   | yuki@wings.msn.to    |
+| 吉岡   | 遥     | yoshi@examples.com   |
+| 松本   | 博美   | matsu@wings.msn.to   |
+| 南     | 沙恵   | minami@wings.msn.to  |
+| 村井   | 佐知子 | murai@wings.msn.to   |
+| 森本   | 絵里   | morimo@examples.com  |
+| 西島   | 文子   | nishi@wings.msn.to   |
+| 根岸   | 裕子   | negi@wings.msn.to    |
++--------+--------+----------------------+
+18 rows in set (0.00 sec)
