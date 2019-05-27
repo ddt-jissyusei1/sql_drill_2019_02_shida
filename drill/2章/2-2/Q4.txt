@@ -10,18 +10,18 @@ Q:社員テーブル（employee）とタイムカードテーブル（time_card�
 
 A:
 SELECT													-- 選択命令文
- CONCAT(shainn.l_name, shainn.f_name) AS 社員氏名,		-- 抽出する'氏'と'名'カラムとその表示カラム名の指定
- AVG(time.work_time) AS 勤務時間平均					-- 抽出する'勤務時間'カラムの平均を求める関数とその表示カラム名の指定
+ CONCAT(employee.l_name, employee.f_name) AS 社員氏名,	-- 抽出する'氏'と'名'カラムとその表示カラム名の指定
+ AVG(time_card.work_time) AS 勤務時間平均				-- 抽出する'勤務時間'カラムの平均を求める関数とその表示カラム名の指定
 FROM													-- 選択先指定命令句
- employee AS shainn										-- 抽出先'社員'テーブルと競合防止の修飾の指定
+ employee												-- 抽出先'社員'テーブルの指定
 LEFT JOIN												-- 外部結合命令句
- time_card AS time										-- 結合先'タイムカード'テーブルと競合防止の修飾の指定
+ time_card												-- 結合先'タイムカード'テーブルの指定
 ON														-- 結合キー指定句
- employee.s_id = time.s_id								-- 結合するキー同士の指定
+ employee.s_id = time_card.s_id							-- 結合するキー同士の指定
 GROUP BY												-- グルーピング命令句
  employee.s_id											-- グルーピングする'社員id'カラムの指定
 ORDER BY												-- 並び替え命令句
- AVG(time.work_time) DESC								-- '勤務時間'の平均集計関数結果をもとに降順に並び替え
+ AVG(time_card.work_time) DESC							-- '勤務時間'の平均集計関数結果をもとに降順に並び替え
 ;														-- 命令の終了を意味するセミコロン
 
 +------------+--------------+
