@@ -6,18 +6,18 @@ Q:社員テーブル(employee)からそれぞれの社員氏名と上司氏名�
 
 
 A:
-SELECT 												-- 選択命令文
- CONCAT(shainn.l_name, shainn.f_name) AS 社員氏名,	-- 社員の'氏'と'名'データを結合し別名をつけて抽出する
- CONCAT(boss.l_name, boss.f_name) AS 上司氏名		-- 上司の'氏'と'名'データを結合し別名をつけて抽出する
-FROM												-- 抽出先指定命令文
- employee AS shainn									-- 社員名を抽出する社員テーブルを同名競合防止のため別名をつけて指定
-LEFT JOIN											-- 左結合命令句
- employee AS boss									-- 上司名を抽出する社員テーブルを同名競合防止のため別名をつけて指定
-ON													-- 結合キー指定句
- shainn.b_id = boss.s_id 							-- 結合するキー同士の指定
-ORDER BY											-- 並び替え命令句
- shainn.s_id										-- 社員コードを元に昇順にデータを並び替える
-;													-- 命令の終了を意味するセミコロン
+SELECT 																-- 選択命令文
+ CONCAT(employeesList.l_name, employeesList.f_name) AS 社員氏名,	-- 社員の'氏'と'名'データを結合し別名をつけて抽出する
+ CONCAT(boss.l_name, boss.f_name) AS 上司氏名						-- 上司の'氏'と'名'データを結合し別名をつけて抽出する
+FROM																-- 抽出先指定命令文
+ employee AS employeesList											-- 社員名を抽出する社員テーブルを同名競合防止のため別名をつけて指定
+LEFT JOIN															-- 左結合命令句
+ employee AS boss													-- 上司名を抽出する社員テーブルを同名競合防止のため別名をつけて指定
+ON																	-- 結合キー指定句
+ shainn.b_id = boss.s_id 											-- 結合するキー同士の指定
+ORDER BY															-- 並び替え命令句
+ shainn.s_id														-- 社員コードを元に昇順にデータを並び替える
+;																	-- 命令の終了を意味するセミコロン
 
 +------------+------------+
 | 社員氏名   | 上司氏名   |
