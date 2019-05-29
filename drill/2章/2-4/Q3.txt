@@ -1,0 +1,43 @@
+﻿解答日：2019/05/29
+
+
+Q:注文書テーブル（order_main）と注文明細テーブル（order_desc）、ユーザテーブル（usr）、商品テーブル（product）を結合し、
+　未納の注文について、発注日、注文コード、商品コード昇順に注文情報を出力してみましょう。
+　出力列の別名は、発注日、注文コード、利用者氏名、商品名、商品単価、購入数とします。
+
+
+A:
+SELECT
+ order.order_date AS 発注日,
+ order.po_id AS 注文コード,
+ userInfo.CONCAT(l_name, f_name) AS 利用者氏名,
+ productInfo.p_name AS 商品名,
+ productInfo.price AS 商品単価,
+ productInfo.quantity AS 購入数
+FROM
+ (
+  FROM
+   (
+    order_main AS order
+   LEFT JOIN
+    order_desc AS orderDetail
+   ON
+    order.po_id = orderDetail.po_id
+   )
+  LEFT JOIN
+   usr AS userInfo
+  ON
+   order.user_id = userInfo.user_id
+ )
+LEFT JOIN
+ product AS productInfo
+ON
+ orderDetail.p_id = productInfo.p_id
+WHERE
+ order.delivery_date IS NULL
+ORDER BY
+ order.order_date,
+ order.po_id,
+ productInfo.po_id ASC
+;
+
