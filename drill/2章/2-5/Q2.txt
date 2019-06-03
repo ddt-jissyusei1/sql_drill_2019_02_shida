@@ -1,0 +1,43 @@
+﻿解答日：
+
+
+Q:所属部署テーブル（depart）から社員テーブル（employee）で使われていない部署コード、
+　部署名を取り出してみましょう。
+　以下の空欄を埋めて、SQL命令を完成させてください。
+
+SELECT
+ depart_id,
+ depart_name
+FROM
+ [ ① ]
+WHERE
+ [ ② ]
+ (
+  SELECT
+   *
+  FROM
+   employee
+  WHERE
+   [ ③ ]
+ )
+;
+
+
+A:
+SELECT
+ depart_id,
+ depart_name
+FROM
+ depart
+WHERE
+ depart_id <>
+ (
+  SELECT
+   *
+  FROM
+   employee
+  WHERE
+   retired = 1
+ )
+;
+
