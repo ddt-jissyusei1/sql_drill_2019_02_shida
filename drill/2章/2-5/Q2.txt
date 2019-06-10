@@ -1,4 +1,4 @@
-﻿解答日：
+﻿解答日：2019/06/10
 
 
 Q:所属部署テーブル（depart）から社員テーブル（employee）で使われていない部署コード、
@@ -24,20 +24,26 @@ WHERE
 
 
 A:
-SELECT
- depart_id,
- depart_name
-FROM
- depart
-WHERE
- depart_id <>
- (
-  SELECT
-   *
-  FROM
-   employee
-  WHERE
-   retired = 1
- )
-;
+SELECT										-- 選択命令文
+ depart_id,									-- 抽出する'部署コード'カラムの指定
+ depart_name								-- 抽出する'部署名'カラムの指定
+FROM										-- 抽出元のテーブル指定
+ depart										-- 抽出元の'所属部署'テーブルの指定
+WHERE										-- 抽出条件指定句
+ NOT EXISTS									-- サブクエリの情報が合致しない行を抽出するための演算子
+ (											-- サブクエリの開始
+  SELECT									-- サブクエリの選択命令文
+   *										-- すべてのカラムを選択する
+  FROM										-- サブクエリの抽出元テーブルの指定
+   employee									-- 抽出元の'社員'テーブルの指定
+  WHERE										-- 抽出条件指定句
+   employee.depart_id = depart.depart_id	-- '社員'テーブルと'所属部署'テーブルの'部署コード'カラムレコードが等しいデータ
+ )											-- サブクエリの終了
+;											-- SQL命令の終了
 
++-----------+-------------+
+| depart_id | depart_name |
++-----------+-------------+
+| E02       | 第二営業部  |
++-----------+-------------+
+1 row in set (0.00 sec)
