@@ -1,0 +1,46 @@
+解答日：2019/07/01
+
+
+Q:問１のSQL命令を相関サブクエリを使って書き換えてみましょう。
+
+[ ① ]
+ employee
+SET
+ depart_id = 'Z99'
+WHERE
+ [ ② ]
+ (
+  SELECT
+   *
+  FROM
+   depart
+  WHERE
+   [ ③ ]
+ )
+;
+
+
+
+A:
+[ ① ]
+ employee
+SET
+ depart_id = 'Z99'
+WHERE
+ [ ② ]
+ (
+  SELECT
+   *
+  FROM
+   depart
+  WHERE
+   [ ③ ]
+ )
+;
+
+
+
+
+※更新内容は同じであるため、書きかえ前後の結果に差異がないことを確認する
+Before　
+
