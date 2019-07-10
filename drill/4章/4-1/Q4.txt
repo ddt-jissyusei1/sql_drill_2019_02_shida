@@ -1,0 +1,32 @@
+解答日：2019/07/10
+
+
+Q:書籍情報テーブル（books）を新規に作成してみましょう。
+
+
+A:
+CREATE TABLE			-- 新規テーブル作成命令
+ books					-- 作成するテーブルの名前の指定
+ (						-- 列定義の開始
+  isbn CHAR(17),		-- 列名'ISBNコード'を文字型(上限17)で定義
+  title VARCHAR(255),	-- 列名'書名'を文字列型(上限255)で定義
+  price INT,			-- 列名'価格'をINT型で定義
+  publish VARCHAR(30),  -- 列名'出版社'を文字列型(上限30)で定義
+  publish_date DATE,	-- 列名'刊行日'を日付型で定義
+  category_id CHAR(5),	-- 列名'分類ID'を文字型(上限5)で定義
+  PRIMARY KEY(isbn)		-- 主キーを'ISBNコード'に定義
+ )						-- 列定義の終了
+;						-- 作成命令の終了
+
+
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  |     | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)

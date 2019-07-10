@@ -1,0 +1,38 @@
+解答日：2019/07/10
+
+
+Q:著者情報テーブル（author）を新規に作成してみましょう。
+　以下の空欄を埋めて、SQL命令を完成させてください。
+
+CREATE TABLE
+ [ ① ]
+ (
+  author_id CHAR(5) [ ② ],
+  name VARCHAR(30),
+  name_kana VARCHAR(100),
+  birth [ ③ ]
+ )
+;
+
+
+A:
+CREATE TABLE						-- 新規テーブル作成命令
+ author								-- 作成するテーブルの名前の指定
+ (									-- 列定義の開始
+  author_id CHAR(5) PRIMARY KEY,	-- 列名'著者コード'を文字型(上限5)の主キーで定義
+  name VARCHAR(30),					-- 列名'著者名'を文字列型(上限30)で定義
+  name_kana VARCHAR(100),			-- 列名'著者名（カナ）'を文字列型(上限100)で定義
+  birth DATE						-- 列名'生年月日'を日付型で定義
+ )									-- 列定義の終了
+;									-- 作成命令の終了
+
+
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| author_id | char(5)      | NO   |     | NULL    |       |
+| name      | varchar(30)  | YES  |     | NULL    |       |
+| name_kana | varchar(100) | YES  |     | NULL    |       |
+| birth     | date         | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
