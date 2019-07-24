@@ -1,0 +1,44 @@
+解答日：2019/07/24
+
+
+Q:以下は、貸し出し記録テーブル（rental）を新規に作成するためのSQLですが、
+　誤りが2点あります。誤りを指摘してください。
+
+CREATE TABLE INTO
+ rental
+ (
+  id INT AUTO_INCREMENT, PRIMARY KEY,
+  user_id CHAR(7),
+  isbn CHAR(13),
+  rental_date DATE,
+  returned SMALLINT DEFAULT 0
+ )
+;
+
+
+A:
+1行目　テーブル作成句で最後のINTOは不要のため削除修正。
+4行目　主キーを列フラグとして指定しているため、区切りのカンマを削除修正
+
+CREATE TABLE							-- 新規テーブル作成命令
+ rental									-- 作成するテーブルの名前の指定
+ (										-- 列定義の開始
+  id INT AUTO_INCREMENT PRIMARY KEY,	-- 列名'貸し出しID'をINT型で主キーとして定義
+  user_id CHAR(7),						-- 列名'利用者コード'を文字型(上限7)で定義
+  isbn CHAR(13),						-- 列名'書籍コード'を文字型(上限13)で定義
+  rental_date DATE,						-- 列名'貸出日'を日付型で定義
+  returned SMALLINT DEFAULT 0			-- 列名'返却済みかどうか'をSMALLINT型のデフォルト値を0で定義
+ )										-- 列定義の終了
+;										-- SQL命令の終了
+
+
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+| user_id     | char(7)     | YES  |     | NULL    |                |
+| isbn        | char(13)    | YES  |     | NULL    |                |
+| rental_date | date        | YES  |     | NULL    |                |
+| returned    | smallint(6) | YES  |     | 0       |                |
++-------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.09 sec)
