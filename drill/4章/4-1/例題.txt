@@ -1,0 +1,42 @@
+解答日：2019/07/10
+
+※4章から新規データベース作成するよう教本に指示があるため、
+　新規で'sqldrill'を作成しそちらを使用する。
+
+
+Q:アンケート回答テーブル（quest）を作成してみましょう。
+　questテーブルのフィールド・レイアウトはP.35の通りです。
+
+
+A:
+CREATE TABLE						-- 新規テーブル作成命令
+ quest								-- 作成するテーブルの名前を指定
+ (									-- テーブルに含まれる列定義の指定開始
+  id INT AUTO_INCREMENT,			-- 列名'回答コード'をINT型の列フラグ'自動連番'で定義
+  name VARCHAR(100) NOT NULL,		-- 列名'回答者名'を文字列型(上限100)のNULL値不可で定義
+  name_kana VARCHAR(255) NOT NULL,	-- 列名'回答者名（カナ）'を文字列型(上限255)のNULL値不可で定義
+  sex VARCHAR(5) NOT NULL,			-- 列名'性別'を文字列型(上限5)のNULL値不可で定義
+  prefecture VARCHAR(10) NOT NULL,	-- 列名'都道府県'を文字列型(上限10)のNULL値不可で定義
+  age INT DEFAULT 0,				-- 列名'年齢'をINT型でデフォルト値を'0'で定義
+  answer1 INT NULL,					-- 列名'本書の評価'をINT型のNULL値可で定義
+  answer2 TEXT NULL,				-- 列名'本書の感想'をINT型のNULL値可で定義
+  answered DATETIME NOT NULL,		-- 列名'回答日時'を日付型のNULL値不可で定義
+  PRIMARY KEY (id)					-- '回答コード'を主キーに定義
+ )									-- 列定義の終了
+;									-- テーブル作成命令の終了
+
+
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(100) | NO   |     | NULL    |                |
+| name_kana  | varchar(255) | NO   |     | NULL    |                |
+| sex        | varchar(5)   | NO   |     | NULL    |                |
+| prefecture | varchar(10)  | NO   |     | NULL    |                |
+| age        | int(11)      | YES  |     | 0       |                |
+| answer1    | int(11)      | YES  |     | NULL    |                |
+| answer2    | text         | YES  |     | NULL    |                |
+| answered   | datetime     | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+9 rows in set (0.07 sec)

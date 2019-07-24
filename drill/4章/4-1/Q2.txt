@@ -1,0 +1,38 @@
+解答日：2019/07/10
+
+
+Q:注文明細テーブル（order_desc）を新規に作成してみましょう。
+　以下の空欄を埋めて、SQL命令を完成させてください。
+
+
+[ ① ]
+ order_desc
+ (
+  po_id INT NOT NULL,
+  p_id CHAR(10) NOT NULL,
+  [ ② ],
+  [ ③ ](po_id, p_id)
+ )
+;
+
+
+A:
+CREATE TABLE				-- 新規テーブル作成命令
+ order_desc					-- 作成するテーブルの名前の指定
+ (							-- 列定義の開始
+  po_id INT NOT NULL,		-- 列名'注文番号'をINT型のNULL不可で定義
+  p_id CHAR(10) NOT NULL,	-- 列名'商品コード'をINT型のNULL不可で定義
+  quantity INT,				-- 列名'購入数'をINT型で定義
+  PRIMARY KEY(po_id, p_id)	-- 主キーを'注文番号'と'商品コード'に定義
+ )							-- 列定義の終了
+;							-- テーブル作成命令の終了
+
+
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| po_id    | int(11)  | NO   | PRI | NULL    |       |
+| p_id     | char(10) | NO   | PRI | NULL    |       |
+| quantity | int(11)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
