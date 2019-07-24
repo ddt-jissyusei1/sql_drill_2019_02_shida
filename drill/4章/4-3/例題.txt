@@ -1,0 +1,50 @@
+解答日：2019/07/24
+
+Q:アンケート回答テーブル（quest）の末尾、
+　新規の列として「DATETIME型のlast_update（最終更新日）」を追加してみましょう。
+
+
+A:
+ALTER TABLE				-- テーブル定義内容変更命令
+ quest					-- 定義を変更するテーブル名の指定
+ADD						-- '追加'変更するための命令句
+ last_update DATETIME	-- 追加する列名と定義の指定
+AFTER					-- 追加先の指定句（後方指定）
+ answered				-- 追加先の列名の指定
+;						-- SQL命令の終了
+
+
+Before
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(100) | NO   |     | NULL    |                |
+| name_kana  | varchar(255) | NO   |     | NULL    |                |
+| sex        | varchar(5)   | NO   |     | NULL    |                |
+| prefecture | varchar(10)  | NO   |     | NULL    |                |
+| age        | int(11)      | YES  |     | 0       |                |
+| answer1    | int(11)      | YES  |     | NULL    |                |
+| answer2    | text         | YES  |     | NULL    |                |
+| answered   | datetime     | NO   |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+9 rows in set (0.03 sec)
+
+
+After
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(100) | NO   |     | NULL    |                |
+| name_kana   | varchar(255) | NO   |     | NULL    |                |
+| sex         | varchar(5)   | NO   |     | NULL    |                |
+| prefecture  | varchar(10)  | NO   |     | NULL    |                |
+| age         | int(11)      | YES  |     | 0       |                |
+| answer1     | int(11)      | YES  |     | NULL    |                |
+| answer2     | text         | YES  |     | NULL    |                |
+| answered    | datetime     | NO   |     | NULL    |                |
+| last_update | datetime     | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+10 rows in set (0.03 sec)
+

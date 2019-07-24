@@ -1,0 +1,59 @@
+解答日：2019/07/24
+
+
+Q:書籍情報テーブル（books）に対して、
+　pages列（INT型、デフォルト値は0）、rating列（CHAR(1)型、デフォルトは'B'）を新たに追加してみましょう。
+　追加先は、テーブル定義の一番最後とします。
+　空欄を埋めて、SQL命令を完成させてください。
+
+[ ① ]
+ books
+ADD
+ [ ② ],
+ADD
+ rating CHAR(1) DEFAULT 'B' NOT NULL
+AFTER
+ [ ③ ]
+;
+
+
+A:
+ALTER TABLE								-- テーブル定義の変更命令
+ books									-- 定義を変更するテーブル名の指定
+ADD										-- '追加'の変更命令
+ pages INT DEFAULT 0,					-- 追加する'ページ数'列名と定義の指定
+ADD										-- 二つ目の'追加'の変更命令
+ rating CHAR(1) DEFAULT 'B' NOT NULL	-- 追加する'評価付け'の列名と定義の指定
+AFTER									-- 指定列の後方追加命令
+ category_id							-- 後方追加先の'分類コード'カラム名の指定
+;										-- SQL命令の終了
+
+
+Before
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.04 sec)
+
+
+After
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
+| rating       | char(1)      | NO   |     | B       |       |
+| pages        | int(11)      | YES  |     | 0       |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.03 sec)
