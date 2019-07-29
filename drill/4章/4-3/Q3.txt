@@ -1,0 +1,47 @@
+解答日：2019/07/29
+
+
+Q:書籍情報テーブル（books）のcategory_idの後方にsales列（INT型）を追加してみましょう。
+
+
+A:
+ALTER TABLE		-- テーブル定義の変更命令
+ books			-- 定義を変更するテーブル名の指定
+ADD				-- '追加'変更命令句
+ sales INT		-- 追加するカラム名と型の指定
+AFTER			-- 後方追加の指定句
+ category_id	-- 後方追加先のカラム名の指定
+;				-- SQL命令の終了
+
+
+Before
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
+| rating       | char(1)      | NO   |     | B       |       |
+| pages        | int(11)      | YES  |     | 0       |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.03 sec)
+
+
+After
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
+| sales        | int(11)      | YES  |     | NULL    |       |
+| rating       | char(1)      | NO   |     | B       |       |
+| pages        | int(11)      | YES  |     | 0       |       |
++--------------+--------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)

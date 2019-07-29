@@ -1,0 +1,67 @@
+解答日：2019/07/29
+
+
+Q:以下は、社員テーブル（employee）のdepart_id列の後方に
+　「email列（VARCHAR(255)型）」を追加するSQL命令ですが、
+　2点誤りがあります。誤りを指摘してください。
+
+ALTER TABLE
+ employee
+ADD TO
+ email VARCHAR(255) NOT NULL
+BEFORE
+ depart_id
+;
+
+
+A:
+3行目 '追加'変更命令句は'ADD'のみのため、'TO'を削除修正
+5行目　追加先指定句に'BEFORE'はないため、後方追加の'AFTER'に修正
+
+ALTER TABLE						-- テーブル定義変更命令
+ employee						-- 定義を変更するテーブル名の指定
+ADD								-- '追加'変更命令句
+ email VARCHAR(255) NOT NULL	-- 追加するカラム名とその定義の指定
+AFTER							-- 後方追加先指定句
+ depart_id						-- 後方追加するカラム名の指定
+;								-- SQL命令の終了
+
+
+
+Before
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| s_id        | char(7)      | NO   | PRI | NULL    |       |
+| l_name      | varchar(20)  | YES  |     | NULL    |       |
+| f_name      | varchar(20)  | YES  |     | NULL    |       |
+| l_name_kana | varchar(100) | YES  |     | NULL    |       |
+| f_name_kana | varchar(100) | YES  |     | NULL    |       |
+| sex         | smallint(6)  | YES  |     | NULL    |       |
+| class       | varchar(20)  | YES  |     | NULL    |       |
+| depart_id   | char(3)      | YES  |     | NULL    |       |
+| b_id        | char(7)      | YES  |     | NULL    |       |
+| last_update | date         | YES  |     | NULL    |       |
+| retired     | smallint(6)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+11 rows in set (0.01 sec)
+
+
+After
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| s_id        | char(7)      | NO   | PRI | NULL    |       |
+| l_name      | varchar(20)  | YES  |     | NULL    |       |
+| f_name      | varchar(20)  | YES  |     | NULL    |       |
+| l_name_kana | varchar(100) | YES  |     | NULL    |       |
+| f_name_kana | varchar(100) | YES  |     | NULL    |       |
+| sex         | smallint(6)  | YES  |     | NULL    |       |
+| class       | varchar(20)  | YES  |     | NULL    |       |
+| depart_id   | char(3)      | YES  |     | NULL    |       |
+| email       | varchar(255) | NO   |     | NULL    |       |
+| b_id        | char(7)      | YES  |     | NULL    |       |
+| last_update | date         | YES  |     | NULL    |       |
+| retired     | smallint(6)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.05 sec)

@@ -1,0 +1,64 @@
+解答日：2019/07/29
+
+
+Q:ユーザテーブル（usr）のf_name_kana列の後方に以下の2列を追加してみましょう。
+
+・sex列(VARCHAR(5)型、デフォルト値は男)
+・job列(VARCHAR(30)型)
+
+
+A:
+ALTER TABLE						-- テーブル定義変更命令
+ usr							-- 定義を変更するテーブル名の指定
+ADD								-- '追加'変更命令句
+ sex VARCHAR(5)	DEFAULT 'male'	-- 追加するカラム名と型、デフォルト値の指定
+AFTER							-- 後方追加指定句
+ f_name_kana,					-- 後方追加先のカラム名の指定
+ADD								-- 二つ目の'追加'変更命令句
+ job VARCHAR(30)				-- 追加するカラム名と型の指定
+AFTER							-- 後方追加指定句
+ f_name_kana					-- 後方追加先のカラム名の指定
+;								-- SQL命令の終了
+
+
+Before
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| user_id     | char(7)      | NO   | PRI | NULL    |       |
+| l_name      | varchar(20)  | YES  |     | NULL    |       |
+| f_name      | varchar(20)  | YES  |     | NULL    |       |
+| l_name_kana | varchar(100) | YES  |     | NULL    |       |
+| f_name_kana | varchar(100) | YES  |     | NULL    |       |
+| prefecture  | varchar(15)  | YES  | MUL | NULL    |       |
+| city        | varchar(20)  | YES  |     | NULL    |       |
+| o_address   | varchar(100) | YES  |     | NULL    |       |
+| tel         | varchar(20)  | YES  |     | NULL    |       |
+| email       | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+10 rows in set (0.02 sec)
+
+
+
+After
+※sex列のデフォルト値'男'で以下の実行エラーが発生し原因不明なため、
+一時的に英語で代替して実行
+ERROR 1067 (42000): Invalid default value for 'sex'
+
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| user_id     | char(7)      | NO   | PRI | NULL    |       |
+| l_name      | varchar(20)  | YES  |     | NULL    |       |
+| f_name      | varchar(20)  | YES  |     | NULL    |       |
+| l_name_kana | varchar(100) | YES  |     | NULL    |       |
+| f_name_kana | varchar(100) | YES  |     | NULL    |       |
+| job         | varchar(30)  | YES  |     | NULL    |       |
+| sex         | varchar(5)   | YES  |     | male    |       |
+| prefecture  | varchar(15)  | YES  | MUL | NULL    |       |
+| city        | varchar(20)  | YES  |     | NULL    |       |
+| o_address   | varchar(100) | YES  |     | NULL    |       |
+| tel         | varchar(20)  | YES  |     | NULL    |       |
+| email       | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.04 sec)
