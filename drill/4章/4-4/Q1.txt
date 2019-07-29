@@ -1,0 +1,53 @@
+解答日：2019/07/29
+
+Q:書籍情報テーブル（books）上、
+　publish列の定義を「VARCHAR(100)NULLを許可」で変更してみましょう。
+　以下の空欄を埋めて、SQL命令を完成させてください。
+
+[ ① ]
+ books
+MODIFY
+ [ ② ]
+;
+
+
+A:
+ALTER TABLE					-- テーブル定義変更命令
+ books						-- 定義を変更するテーブル名の指定
+MODIFY						-- 列や制約条件変更句
+ publish VARCHAR(100) NULL	-- publish列の変更内容の指定
+;							-- SQL命令の終了
+
+
+Before
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(30)  | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
+| sales        | int(11)      | YES  |     | NULL    |       |
+| rating       | char(1)      | NO   |     | B       |       |
+| pages        | int(11)      | YES  |     | 0       |       |
++--------------+--------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)
+
+
+After
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| isbn         | char(17)     | NO   | PRI | NULL    |       |
+| title        | varchar(255) | YES  |     | NULL    |       |
+| price        | int(11)      | YES  |     | NULL    |       |
+| publish      | varchar(100) | YES  | MUL | NULL    |       |
+| publish_date | date         | YES  |     | NULL    |       |
+| category_id  | char(5)      | YES  |     | NULL    |       |
+| sales        | int(11)      | YES  |     | NULL    |       |
+| rating       | char(1)      | NO   |     | B       |       |
+| pages        | int(11)      | YES  |     | 0       |       |
++--------------+--------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)

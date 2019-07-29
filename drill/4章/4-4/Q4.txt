@@ -1,0 +1,50 @@
+解答日：2019/07/29
+
+Q:以下は、アクセス記録テーブル（access_log）に対して、
+　既存のreferer列の定義を「データ型VARCHAR(200)、NULLを許可」
+　で置き換えるためのSQL命令ですが、2点誤りがあります。
+　誤りを指摘してください。
+
+ALTER TABLE
+ access_log
+MODIFY WITH
+ referer,VARCHAR(200),NULL
+;
+
+
+A:
+3行目　制約条件変更句は'MODIFY'のみのため、'WITH'を削除修正
+4行目　一定義内の変更内容はカンマではなく半角スペースで区切るため、カンマを削除修正
+
+ALTER TABLE					-- テーブル定義変更命令
+ access_log					-- 定義を変更するテーブル名の指定
+MODIFY						-- 列や制約条件変更句
+ referer VARCHAR(200) NULL	-- 'リンク元のURL'列の変更内容の指定
+;							-- SQL命令の終了
+
+
+Before
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| log_id      | int(11)      | NO   | PRI | NULL    |       |
+| page_id     | char(5)      | YES  |     | NULL    |       |
+| referer     | varchar(255) | YES  |     | NULL    |       |
+| ip_address  | char(15)     | YES  |     | NULL    |       |
+| access_date | datetime     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.05 sec)
+
+
+After
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| log_id      | int(11)      | NO   | PRI | NULL    |       |
+| page_id     | char(5)      | YES  |     | NULL    |       |
+| referer     | varchar(200) | YES  |     | NULL    |       |
+| ip_address  | char(15)     | YES  |     | NULL    |       |
+| access_date | datetime     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
