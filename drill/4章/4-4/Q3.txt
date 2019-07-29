@@ -1,0 +1,36 @@
+解答日：2019/07/29
+
+Q:著者情報テーブル(author)上、著者名の定義を
+　「VARCHAR(100) デフォルト値は空文字列」に変更してみましょう。
+
+
+A:
+ALTER TABLE						-- テーブル定義変更命令
+ author							-- 定義を変更するテーブル名の指定
+MODIFY							-- 列や制約条件変更句
+ name VARCHAR(100) DEFAULT ''	-- '著者名'列の変更内容指定
+;								-- SQL命令の終了
+
+
+Before
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| author_id | char(5)      | NO   | PRI | NULL    |       |
+| name      | varchar(30)  | YES  |     | NULL    |       |
+| name_kana | varchar(100) | YES  |     | NULL    |       |
+| birth     | date         | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+
+After
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| author_id | char(5)      | NO   | PRI | NULL    |       |
+| name      | varchar(100) | YES  |     |         |       |
+| name_kana | varchar(100) | YES  |     | NULL    |       |
+| birth     | date         | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
